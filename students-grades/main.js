@@ -19,8 +19,8 @@ function calculateAverage(student) {
     return AVG;
 }
 
-console.log(calculateAverage('Sara'));
-console.log(getStudentResult('Sara'));
+// console.log(calculateAverage('Sara'));
+// console.log(getStudentResult('Sara'));
 
 
 
@@ -31,11 +31,32 @@ function getStudentResult(student) {
     else return "Non admis";
 }
 
-function getStudentsByField(students, field){
+function getStudentsByField(students, field) {
     let stds = [];
     students.forEach(std => {
-        if(std.field === field){
+        if (std.field === field) {
             stds.push(std.name);
         }
     });
+    return stds;
+}
+
+// console.log(getStudentsByField(students, 'Development'));
+
+function getSuccessfulStudents(students) {
+    const successfulStudents = [];
+
+    students.forEach(std => {
+            let grade = calculateAverage(std.name);            
+            if (grade >= 12) {
+                successfulStudents.push(std)
+            }
+    })
+    return successfulStudents;
+}
+
+console.log(getSuccessfulStudents(students));
+
+function getBestStudent(students){
+    
 }
