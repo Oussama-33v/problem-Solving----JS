@@ -12,17 +12,15 @@ function getBooksByCategory(books, category) {
 
 
 function getReaderReviews(books, reader) {
-    let readerReviews = [];
-    books.forEach(book => {
-        let reviews = book.reviews.filter(review => {
-            return book.title, review.reader === reader
-        });
-        readerReviews.push(reviews)
+    books.map(book => {
+        const readerReviews =  book.reviews.filter(review => {return review.reader === reader});
+        readerReviews.forEach( reader =>{ console.log('Reader :',reader.reader ,'-->', 'Review :',reader.rating, 'Book title :', book.title );
     });
-    return readerReviews;
+        
+    });
 }
 
-// console.log(getHighlyRatedBooks(books));
+getReaderReviews(books, "Amine");
 
 
 function getHighlyRatedBooks(books) {
