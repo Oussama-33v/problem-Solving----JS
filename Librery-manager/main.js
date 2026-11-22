@@ -24,20 +24,19 @@ function getReaderReviews(books, reader) {
 
 
 function getHighlyRatedBooks(books) {
-    const averageBooksRating = [];
+    const HighlyRatedBooks = [];
+    console.log('Highly Rated Books >>');
+    
     books.forEach(book => {
-        let ratesSum = 0
+        let ratesSum = 0;
         book.reviews.forEach(rate => {
             ratesSum += rate.rating;
-            averageBooksRating.
-            console.log();
         })
         let AVG = ratesSum / book.reviews.length
-
-        // console.log(ratesSum);
-        // hilghlyRatingBooks.forEach(average =>{ console.log('book name >>',book.title, ':', 'avrage rating >>', ':', average);
-        // })
-
+        if (AVG >= 4.5) {
+            HighlyRatedBooks.push(book);
+            console.log('Book Name :',book.title);
+        }
     })
 }
 console.log(getHighlyRatedBooks(books))
