@@ -50,10 +50,35 @@ function getBestRatedBook(books) {
         let AVG = calculateBooksRatingAvg(book.reviews);
         if (AVG > bestRate) {
             bestRate = AVG
-            bestRatedBook =  book;
+            bestRatedBook = book;
         }
     })
-    return 'Best rated book is : '+ bestRatedBook.title
+    return 'Best rated book is : ' + bestRatedBook.title
 
 }
-console.log(getBestRatedBook(books))
+// console.log(getBestRatedBook(books))
+
+function getMostActiveReader(books) {
+    let allReaders = [];
+    books.forEach(book => {
+        const bookReaders = book.reviews.map(review => {
+           return review.reader
+        })
+        allReaders = allReaders.concat(bookReaders)
+    })
+    let moastActiveReader;
+    allReaders.forEach(reader =>{
+        moastActiveReader = reader;        
+        let deplecated = allReaders.filter(readerName =>{return readerName === moastActiveReader});
+        if(deplecated.includes(reader)){
+            console.log('deja vu');
+            
+            moastActiveReader = '';
+        }
+        console.log(deplecated);
+         
+        
+    })
+
+}
+getMostActiveReader(books)
