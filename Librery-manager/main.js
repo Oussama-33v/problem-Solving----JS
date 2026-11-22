@@ -21,22 +21,39 @@ function getReaderReviews(books, reader) {
 }
 
 // getReaderReviews(books, "Amine");
-
+function calculateBooksRatingAvg(rates) {
+    let ratesSum = 0;
+    rates.forEach(rate => {
+        ratesSum += rate.rating;
+    })
+    let AVG = ratesSum / rates.length
+    return AVG;
+}
 
 function getHighlyRatedBooks(books) {
     const HighlyRatedBooks = [];
-    console.log('Highly Rated Books >>');
-    
     books.forEach(book => {
-        let ratesSum = 0;
-        book.reviews.forEach(rate => {
-            ratesSum += rate.rating;
-        })
-        let AVG = ratesSum / book.reviews.length
+        let AVG = calculateBooksRatingAvg(book.reviews)
         if (AVG >= 4.5) {
             HighlyRatedBooks.push(book);
-            console.log('Book Name :',book.title);
         }
     })
+    return HighlyRatedBooks;
 }
-console.log(getHighlyRatedBooks(books))
+
+
+function getBestRatedBook(books) {
+    let bestRate = 4.5;
+    let bestRatedBook;
+    const HighlyRatedBooks = getHighlyRatedBooks(books);
+    HighlyRatedBooks.forEach(book => {
+        let AVG = calculateBooksRatingAvg(book.reviews);
+        if (AVG > bestRate) {
+            bestRate = AVG
+            bestRatedBook =  book;
+        }
+    })
+    return 'Best rated book is : '+ bestRatedBook.title
+
+}
+console.log(getBestRatedBook(books))
