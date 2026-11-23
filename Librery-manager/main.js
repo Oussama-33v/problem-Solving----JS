@@ -59,26 +59,26 @@ function getBestRatedBook(books) {
 // console.log(getBestRatedBook(books))
 
 function getMostActiveReader(books) {
-    let allReaders = [];
-    books.forEach(book => {
-        const bookReaders = book.reviews.map(review => {
-           return review.reader
-        })
-        allReaders = allReaders.concat(bookReaders)
-    })
-    let moastActiveReader;
-    allReaders.forEach(reader =>{
-        moastActiveReader = reader;        
-        let deplecated = allReaders.filter(readerName =>{return readerName === moastActiveReader});
-        if(deplecated.includes(reader)){
-            console.log('deja vu');
-            
-            moastActiveReader = '';
-        }
-        console.log(deplecated);
-         
-        
-    })
+    const reviewCounts = {}
 
+    books.forEach(book => {
+        book.reviews.forEach(review => {
+            reviewCounts[review.reader] = (reviewCounts[review.reader] || 0) + 1;
+
+        })
+    })
+    let mostActiveReader = null;
+    let maxReviews = 0;
+
+    for (const [reader, count] of Object.entries(reviewCounts)) {
+        if (count > maxReviews) {
+            maxReviews = count;
+            mostActiveReader = reader;
+        }
+    }
+
+    return mostActiveReader;
 }
-getMostActiveReader(books)
+console.log(
+ getMostActiveReader(books)
+);
